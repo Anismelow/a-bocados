@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'recetas',
     'ingredientes',
+    'ventas',
     'rest_framework',
    'drf_yasg',
 ]
