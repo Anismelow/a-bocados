@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'recetas',
     'ingredientes',
     'ventas',
+    'gastos_ingresos',
     'rest_framework',
    'drf_yasg',
 ]
