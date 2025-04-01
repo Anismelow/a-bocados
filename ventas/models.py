@@ -12,14 +12,15 @@ PRECIOS_LUZ = {
     "20": 0.2461, "21": 0.2555, "22": 0.1494, "23": 0.1225,
 }
 
+
 class Venta(models.Model):
     nombre_cliente = models.CharField(max_length=100)
     fecha_venta = models.DateField(default=timezone.now)
     hora_venta = models.TimeField(default=timezone.now)
     horas_trabajadas = models.PositiveIntegerField(default=1)  # Horas trabajadas
     productos_vendidos = models.ManyToManyField(Receta, related_name='ventas')
-    costo_empaque = models.DecimalField(max_digits=6, decimal_places=2, default=0)  # Costo de empaque
-    costo_decoracion = models.DecimalField(max_digits=6, decimal_places=2, default=0)  # Costo de decoraciones extra
+    costo_empaque = models.DecimalField(max_digits=6, decimal_places=2, default=0) 
+    costo_decoracion = models.DecimalField(max_digits=6, decimal_places=2, default=0)  
 
     def calcular_subtotal(self):
         subtotal = 0
@@ -32,7 +33,7 @@ class Venta(models.Model):
         hora_inicio = int(self.hora_venta.strftime("%H"))
         for i in range(self.horas_trabajadas):
             hora_actual = str((hora_inicio + i) % 24).zfill(2)
-            costo_luz = Decimal(str(PRECIOS_LUZ.get(hora_actual, 0)))  # Convertir a Decimal
+            costo_luz = Decimal(str(PRECIOS_LUZ.get(hora_actual, 0)))  
             subtotal += costo_luz
 
         # 3️⃣ Costo de mano de obra (10€ por cada hora trabajada)
@@ -46,7 +47,7 @@ class Venta(models.Model):
 
     def calcular_total_venta(self):
         subtotal = self.calcular_subtotal()
-        return subtotal * Decimal("1.30")
+        return int(subtotal * Decimal("1.30"))
 
     def __str__(self):
         return f"{self.nombre_cliente} - {self.fecha_venta} - Total: {self.calcular_total_venta()}€"
