@@ -2,6 +2,8 @@ from django.db import models
 from recetas.models import Receta
 from django.utils import timezone
 from decimal import Decimal  
+from gastos_ingresos.models import Ingresos
+
 
 
 PRECIOS_LUZ = {
@@ -48,6 +50,9 @@ class Venta(models.Model):
     def calcular_total_venta(self):
         subtotal = self.calcular_subtotal()
         return int(subtotal * Decimal("1.30"))
+    
+   
+        
 
     def __str__(self):
         return f"{self.nombre_cliente} - {self.fecha_venta} - Total: {self.calcular_total_venta()}€"

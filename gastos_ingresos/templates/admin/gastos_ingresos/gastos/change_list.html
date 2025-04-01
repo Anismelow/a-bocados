@@ -1,0 +1,11 @@
+{% extends "admin/change_list.html" %}
+
+{% block result_list %}
+    {{ block.super }}
+    <tfoot>
+        <tr>
+            <td colspan="3" style="text-align: right; font-weight: bold;">Total gastos:</td>
+            <td>{{ total_gastos|floatformat:2 }}€</td>
+        </tr>
+    </tfoot>
+{% endblock %}
