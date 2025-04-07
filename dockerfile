@@ -6,13 +6,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 # Instala dependencias del sistema que puedan ser necesarias para tu proyecto (si usas MySQL, por ejemplo)
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
-    libpq-dev \
-    libmysqlclient-dev \
+    libmariadb-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
 
 # Establece el directorio de trabajo dentro del contenedor
 WORKDIR /app
